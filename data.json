@@ -1,0 +1,56 @@
+{
+    "45": [
+        {
+            "device_name": "45",
+            "mountpoint": "C:\\",
+            "total": 63.85,
+            "used": 59.54,
+            "free": 4.31,
+            "percent": 93.2
+        },
+        {
+            "device_name": "45",
+            "mountpoint": "D:\\",
+            "total": 412.41,
+            "used": 342.19,
+            "free": 70.22,
+            "percent": 83.0
+        }
+    ],
+    "78": [
+        {
+            "device_name": "78",
+            "mountpoint": "C:\\",
+            "total": 63.85,
+            "used": 59.98,
+            "free": 3.88,
+            "percent": 93.9
+        },
+        {
+            "device_name": "78",
+            "mountpoint": "D:\\",
+            "total": 412.41,
+            "used": 342.19,
+            "free": 70.22,
+            "percent": 83.0
+        }
+    ],
+    "equipo 3": [
+        {
+            "device_name": "equipo 3",
+            "mountpoint": "C:\\",
+            "total": 63.85,
+            "used": 59.97,
+            "free": 3.88,
+            "percent": 93.9
+        },
+        {
+            "device_name": "equipo 3",
+            "mountpoint": "D:\\",
+            "total": 412.41,
+            "used": 342.19,
+            "free": 70.22,
+            "percent": 83.0
+        }
+    ]
+}
