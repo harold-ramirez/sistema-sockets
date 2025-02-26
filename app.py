@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request
 import socket
 import threading
 import json
+import time
 
 app = Flask(__name__)
 
@@ -19,12 +20,17 @@ def handle_client(client_socket):
     """Maneja la conexión de un cliente y recibe sus datos."""
     try:
         data = client_socket.recv(4096).decode('utf-8')
-        print(f"Datos recibidos: {data}")  # 🔹 Ver si el servidor está recibiendo información
+        print(f"Datos recibidos: {data}") 
         
         if data:
-            storage_info = json.loads(data)  # Convertir JSON a diccionario
+            storage_info = json.loads(data)  
             device_name = storage_info[0]['device_name']
-            devices_data[device_name] = storage_info
+            
+            # Guardar la marca de tiempo actual
+            devices_data[device_name] = {
+                "data": storage_info,
+                "last_update": time.time()  # Guardar tiempo en segundos
+            }
             save_data()
             print(f"Datos guardados para {device_name}: {storage_info}")  
     except Exception as e:
@@ -63,8 +69,27 @@ def index():
 
 @app.route('/data')
 def get_data():
-    """Devuelve los datos en formato JSON para la web."""
-    return jsonify(devices_data)
+    """Devuelve los datos en formato JSON, marcando los dispositivos inactivos."""
+    current_time = time.time()
+    timeout_seconds = 10  # Tiempo antes de marcar como "No reporta"
+
+    updated_devices = {}
+
+    for device, info in devices_data.items():
+        if not isinstance(info, dict):  # 🚨 Evita errores si info es incorrecta
+            print(f"Advertencia: datos corruptos para {device}: {info}")  # Opcional, para depuración
+            continue
+        
+        last_update = info.get("last_update", 0)
+        status = "Activo" if current_time - last_update <= timeout_seconds else "No reporta"
+
+        updated_devices[device] = {
+            "data": info["data"],
+            "status": status
+        }
+
+    return jsonify(updated_devices)
+
 
 try:
     with open("data.json", "r") as file:
