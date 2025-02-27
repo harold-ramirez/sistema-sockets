@@ -3,11 +3,32 @@ import socket
 import threading
 import json
 import time
+import firebase_admin
+from firebase_admin import credentials, firestore
 
 app = Flask(__name__)
 
+# Cargar credenciales de Firebase
+cred = credentials.Certificate("practica1-sockets-firebase-adminsdk-fbsvc-442b9c62fe.json") #Cambiar esto por la key generada de Firebase
+firebase_admin.initialize_app(cred)
+
+# Conectar a Firestore
+db = firestore.client()
+
 # Almacenar datos de los clientes en un diccionario
 devices_data = {}
+
+def save_to_firebase(device_name, storage_info):
+    """Guarda los datos en Firebase Firestore."""
+    try:
+        doc_ref = db.collection("devices").document(device_name)  # Documento con el nombre del dispositivo
+        doc_ref.set({
+            "data": storage_info,
+            "last_update": firestore.SERVER_TIMESTAMP  # Marca de tiempo automática
+        })
+        print(f"✅ Datos guardados en Firebase para {device_name}")
+    except Exception as e:
+        print(f"❌ Error al guardar en Firebase: {e}")
 
 def save_data():
     """Guarda los datos en un archivo JSON"""
@@ -25,9 +46,9 @@ def handle_client(client_socket):
         if data:
             storage_info = json.loads(data)
             device_name = storage_info[0]['device_name']
-            
-            current_time = time.time()
 
+            current_time = time.time()
+            
             # Guardar la marca de tiempo solo si es la primera conexión
             if device_name not in devices_data:
                 devices_data[device_name] = {
@@ -40,6 +61,7 @@ def handle_client(client_socket):
                 devices_data[device_name]["data"] = storage_info
 
             save_data()
+            save_to_firebase(device_name, storage_info)
             print(f"Datos guardados para {device_name}: {storage_info}")  
     except Exception as e:
         print(f"Error recibiendo datos: {e}")
@@ -85,7 +107,7 @@ def get_data():
 
     for device, info in devices_data.items():
         if not isinstance(info, dict):
-            print(f"Advertencia: datos corruptos para {device}: {info}")
+            print(f"Advertencia: datos corruptos para {device}: {info}")  # Opcional, para depuración
             continue
 
         last_update = info.get("last_update", 0)
@@ -126,6 +148,7 @@ def receive_data():
             devices_data[device_id].append(entry)
 
         # Guardar en data.json
+        save_to_firebase(device_id, devices_data[device_id])
         save_data()
         return jsonify({"message": "Datos guardados exitosamente"}), 200
 
