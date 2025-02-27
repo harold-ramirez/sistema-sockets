@@ -1,56 +1,119 @@
 {
-    "45": [
-        {
-            "device_name": "45",
-            "mountpoint": "C:\\",
-            "total": 63.85,
-            "used": 59.54,
-            "free": 4.31,
-            "percent": 93.2
-        },
-        {
-            "device_name": "45",
-            "mountpoint": "D:\\",
-            "total": 412.41,
-            "used": 342.19,
-            "free": 70.22,
-            "percent": 83.0
-        }
-    ],
-    "78": [
-        {
-            "device_name": "78",
-            "mountpoint": "C:\\",
-            "total": 63.85,
-            "used": 59.98,
-            "free": 3.88,
-            "percent": 93.9
-        },
-        {
-            "device_name": "78",
-            "mountpoint": "D:\\",
-            "total": 412.41,
-            "used": 342.19,
-            "free": 70.22,
-            "percent": 83.0
-        }
-    ],
-    "equipo 3": [
-        {
-            "device_name": "equipo 3",
-            "mountpoint": "C:\\",
-            "total": 63.85,
-            "used": 59.97,
-            "free": 3.88,
-            "percent": 93.9
-        },
-        {
-            "device_name": "equipo 3",
-            "mountpoint": "D:\\",
-            "total": 412.41,
-            "used": 342.19,
-            "free": 70.22,
-            "percent": 83.0
-        }
-    ]
+    "SANTA CRUZ": {
+        "data": [
+            {
+                "device_name": "SANTA CRUZ",
+                "mountpoint": "C:\\",
+                "total": 442.64,
+                "used": 408.36,
+                "free": 34.28,
+                "percent": 92.3
+            }
+        ],
+        "last_update": 1740610541.8600805
+    },
+    "COCHABAMBA": {
+        "data": [
+            {
+                "device_name": "COCHABAMBA",
+                "mountpoint": "C:\\",
+                "total": 236.25,
+                "used": 191.63,
+                "free": 44.62,
+                "percent": 81.1
+            }
+        ],
+        "last_update": 1740618697.6904328
+    },
+    "LA PAZ": {
+        "data": [
+            {
+                "device_name": "LA PAZ",
+                "mountpoint": "C:\\",
+                "total": 442.64,
+                "used": 408.36,
+                "free": 34.28,
+                "percent": 92.3
+            }
+        ],
+        "last_update": 1740610541.8600805
+    },
+    "ORURO": {
+        "data": [
+            {
+                "device_name": "ORURO",
+                "mountpoint": "C:\\",
+                "total": 442.64,
+                "used": 408.36,
+                "free": 34.28,
+                "percent": 92.3
+            }
+        ],
+        "last_update": 1740610541.8600805
+    },
+    "POTOSI": {
+        "data": [
+            {
+                "device_name": "POTOSI",
+                "mountpoint": "C:\\",
+                "total": 442.64,
+                "used": 408.36,
+                "free": 34.28,
+                "percent": 92.3
+            }
+        ],
+        "last_update": 1740610541.8600805
+    },
+    "CHUQUISACA": {
+        "data": [
+            {
+                "device_name": "CHUQUISACA",
+                "mountpoint": "C:\\",
+                "total": 236.25,
+                "used": 191.63,
+                "free": 44.62,
+                "percent": 81.1
+            }
+        ],
+        "last_update": 1740619030.4632962
+    },
+    "TARIJA": {
+        "data": [
+            {
+                "device_name": "TARIJA",
+                "mountpoint": "C:\\",
+                "total": 236.25,
+                "used": 191.62,
+                "free": 44.63,
+                "percent": 81.1
+            }
+        ],
+        "last_update": 1740619245.5357707
+    },
+    "PANDO": {
+        "data": [
+            {
+                "device_name": "PANDO",
+                "mountpoint": "C:\\",
+                "total": 442.64,
+                "used": 408.36,
+                "free": 34.28,
+                "percent": 92.3
+            }
+        ],
+        "last_update": 1740610541.8600805
+    },
+    "BENI": {
+        "data": [
+            {
+                "device_name": "BENI",
+                "mountpoint": "C:\\",
+                "total": 236.25,
+                "used": 191.65,
+                "free": 44.6,
+                "percent": 81.1
+            }
+        ],
+        "last_update": 1740620880.9524195
+    }
 }

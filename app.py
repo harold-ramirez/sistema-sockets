@@ -23,14 +23,22 @@ def handle_client(client_socket):
         print(f"Datos recibidos: {data}") 
         
         if data:
-            storage_info = json.loads(data)  
+            storage_info = json.loads(data)
             device_name = storage_info[0]['device_name']
             
-            # Guardar la marca de tiempo actual
-            devices_data[device_name] = {
-                "data": storage_info,
-                "last_update": time.time()  # Guardar tiempo en segundos
-            }
+            current_time = time.time()
+
+            # Guardar la marca de tiempo solo si es la primera conexión
+            if device_name not in devices_data:
+                devices_data[device_name] = {
+                    "connection_time": current_time,  # Marca de conexión inicial
+                    "data": storage_info,
+                    "last_update": current_time
+                }
+            else:
+                devices_data[device_name]["last_update"] = current_time
+                devices_data[device_name]["data"] = storage_info
+
             save_data()
             print(f"Datos guardados para {device_name}: {storage_info}")  
     except Exception as e:
@@ -69,24 +77,29 @@ def index():
 
 @app.route('/data')
 def get_data():
-    """Devuelve los datos en formato JSON, marcando los dispositivos inactivos."""
+    """Devuelve los datos en formato JSON, manteniendo el orden de conexión."""
     current_time = time.time()
     timeout_seconds = 10  # Tiempo antes de marcar como "No reporta"
 
-    updated_devices = {}
+    updated_devices = []
 
     for device, info in devices_data.items():
-        if not isinstance(info, dict):  # 🚨 Evita errores si info es incorrecta
-            print(f"Advertencia: datos corruptos para {device}: {info}")  # Opcional, para depuración
+        if not isinstance(info, dict):
+            print(f"Advertencia: datos corruptos para {device}: {info}")
             continue
-        
+
         last_update = info.get("last_update", 0)
         status = "Activo" if current_time - last_update <= timeout_seconds else "No reporta"
 
-        updated_devices[device] = {
+        updated_devices.append({
+            "device_name": device,
             "data": info["data"],
-            "status": status
-        }
+            "status": status,
+            "connection_time": info.get("connection_time", last_update)  # Si no tiene, usa last_update
+        })
+
+    # Ordenar por connection_time (primero en conectarse aparece primero)
+    updated_devices.sort(key=lambda x: x["connection_time"], reverse=True)
 
     return jsonify(updated_devices)
 
