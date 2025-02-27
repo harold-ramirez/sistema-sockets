@@ -52,5 +52,47 @@
             "free": 70.22,
             "percent": 83.0
         }
-    ]
+    ],
+    "waos": {
+        "data": [
+            {
+                "device_name": "waos",
+                "mountpoint": "C:\\",
+                "total": 63.85,
+                "used": 60.38,
+                "free": 3.47,
+                "percent": 94.6
+            },
+            {
+                "device_name": "waos",
+                "mountpoint": "D:\\",
+                "total": 412.41,
+                "used": 342.2,
+                "free": 70.22,
+                "percent": 83.0
+            }
+        ],
+        "last_update": 1740612137.9291935
+    },
+    "Cbba": {
+        "data": [
+            {
+                "device_name": "Cbba",
+                "mountpoint": "C:\\",
+                "total": 63.85,
+                "used": 60.52,
+                "free": 3.33,
+                "percent": 94.8
+            },
+            {
+                "device_name": "Cbba",
+                "mountpoint": "D:\\",
+                "total": 412.41,
+                "used": 342.2,
+                "free": 70.22,
+                "percent": 83.0
+            }
+        ],
+        "last_update": 1740614911.3832164
+    }
 }
